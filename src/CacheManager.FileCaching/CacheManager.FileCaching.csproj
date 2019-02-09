@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net40;net45</TargetFrameworks>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Nuget Package Details -->
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageTags>cache filecache filecaching cachemanager</PackageTags>
+    <Authors>maldworth</Authors>
+    <Description>FileCaching is an implementation of BaseCacheHandle from CacheManager.Core.</Description>
+    <Copyright>Copyright (c) 2018, maldworth (https://maldworth.com)</Copyright>
+
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <!-- SourceLink Config, needs nuget package in each csproj Microsoft.SourceLink.GitHub in order to work -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Runtime.Caching" />
+    <PackageReference Include="FileCache" Version="2.2.0" />
+    <PackageReference Include="CacheManager.Core" Version="1.2.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>

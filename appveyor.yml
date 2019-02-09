@@ -1,0 +1,16 @@
+branches:
+  only:
+    - develop
+    - master
+
+artifacts:
+  path: 'artifacts\**'
+
+image: Visual Studio 2017
+
+skip_tags: false
+build: off
+test: off
+
+build_script:
+  - ps: .\build.ps1
