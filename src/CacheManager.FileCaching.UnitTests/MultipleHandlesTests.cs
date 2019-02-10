@@ -25,7 +25,7 @@
 #if NETCORE
                 .WithJsonSerializer()
 #endif
-                .WithSystemRuntimeCacheHandle()
+                .WithDictionaryHandle()
                 .WithExpiration(ExpirationMode.Absolute, TimeSpan.FromSeconds(2))
                 .EnablePerformanceCounters()
                 .EnableStatistics()
@@ -62,7 +62,7 @@
             // Now use the handle, and it should get a miss on the InMemory, but a Hit on the FileCache on disk
             var resultValue = _cache2.Get<string>(myTextKey); // 1x Miss on the in memory, and 1x Hit on File Cache, +1 Get in memory, and +1 get file cache
             var resultValue2 = _cache2.Get<string>(myTextKey); // 1x Hit on in memory, +1 get in memory
-            System.Threading.Thread.Sleep(2000); // Sleep 2 milliseconds, in memory should expire
+            System.Threading.Thread.Sleep(7000); // Sleep 7 seconds, dictionary handle scans for expired every 5 seconds
             var resultValue3 = _cache2.Get<string>(myTextKey); // +1 miss on in memory, +1 get memory, +1 remove memory, +1 Hit file cache
 
             resultValue.Should().Be(myTextValue);
