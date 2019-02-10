@@ -1,6 +1,6 @@
-﻿namespace CacheManager.FileCaching
+﻿namespace CacheManager.Core
 {
-    using CacheManager.Core;
+    using CacheManager.FileCaching;
     using System;
     using System.Runtime.Serialization;
 
@@ -9,7 +9,7 @@
     /// </summary>
     public static class FileCachingBuilderExtensions
     {
-        private const string DefaultCacheName = "default";
+        private const string DefaultCacheName = "defaultFileCache";
 
         /// <summary>
         /// Adds a <see cref="FileCacheHandle{TCacheValue}" /> using a <see cref="System.Runtime.Caching.FileCache"/>.

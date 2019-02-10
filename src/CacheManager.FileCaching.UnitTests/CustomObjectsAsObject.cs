@@ -2,7 +2,6 @@
 {
     using CacheManager.Core;
     using FluentAssertions;
-    using Newtonsoft.Json.Linq;
     using System;
     using Xunit;
 

@@ -58,7 +58,7 @@
     /// </remarks>
     public class FileCacheHandle<TCacheValue> : BaseCacheHandle<TCacheValue>
     {
-        private const string DefaultCacheName = "default";
+        private const string DefaultCacheName = "defaultFileCache";
 
         // can be default or any other name
         private readonly string _cacheName;
