@@ -6,6 +6,7 @@
     using System;
     using System.Collections.Specialized;
     using System.Globalization;
+    using System.IO;
     using System.Runtime.Caching;
     using System.Runtime.Serialization;
     using static CacheManager.Core.Utility.Guard;
@@ -68,6 +69,12 @@
         private ICacheSerializer _serializer;
 
         /// <summary>
+        /// Gets the underlying fileCache used by this FileCacheHandle implementation
+        /// 
+        /// </summary>
+        public FileCache FileCache => _cache;
+
+        /// <summary>
         /// Gets the cache settings.
         /// </summary>
         /// <value>The cache settings.</value>
@@ -77,7 +84,7 @@
         /// Gets the number of items the cache handle currently maintains.
         /// </summary>
         /// <value>The count.</value>
-        public override int Count => (int)_cache.GetCacheSize();
+        public override int Count => (int)_cache.GetCount();
 
         /// <inheritdoc />
         protected override ILogger Logger { get; }
@@ -89,14 +96,26 @@
         /// <param name="configuration">The cache handle configuration.</param>
         /// <param name="loggerFactory">The logger factory.</param>
         /// <param name="serializer">The serializer.</param>
-        /// <param name="typeConverter">The type converter.</param>
+        /// <param name="additionalConfiguration">The FileCache additional configuration.</param>
         public FileCacheHandle(ICacheManagerConfiguration managerConfiguration, CacheHandleConfiguration configuration, ILoggerFactory loggerFactory, ICacheSerializer serializer, FileCacheHandleAdditionalConfiguration additionalConfiguration)
+            : this(managerConfiguration, configuration, loggerFactory, additionalConfiguration)
+        {
+            NotNull(serializer, nameof(serializer));
+            _serializer = serializer;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileCacheHandle{TCacheValue}"/> class.
+        /// </summary>
+        /// <param name="managerConfiguration">The manager configuration.</param>
+        /// <param name="configuration">The cache handle configuration.</param>
+        /// <param name="loggerFactory">The logger factory.</param>
+        /// <param name="additionalConfiguration">The FileCache additional configuration.</param>
+        public FileCacheHandle(ICacheManagerConfiguration managerConfiguration, CacheHandleConfiguration configuration, ILoggerFactory loggerFactory, FileCacheHandleAdditionalConfiguration additionalConfiguration)
             : base(managerConfiguration, configuration)
         {
             NotNull(configuration, nameof(configuration));
             NotNull(loggerFactory, nameof(loggerFactory));
-            //EnsureNotNull(serializer);
-            _serializer = serializer;
 
             Logger = loggerFactory.CreateLogger(this);
             _cacheName = configuration.Name ?? DefaultCacheName;

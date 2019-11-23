@@ -22,8 +22,8 @@
         /// The builder part.
         /// </returns>
         /// <returns>The builder part.</returns>
-        public static ConfigurationBuilderCacheHandlePart WithFileCacheHandle(this ConfigurationBuilderCachePart part, bool calculateCacheSize = false, TimeSpan cleanInterval = new TimeSpan(), bool isBackplaneSource = false)
-            => part?.WithHandle(typeof(FileCacheHandle<>), DefaultCacheName, isBackplaneSource, new FileCacheHandleAdditionalConfiguration { CalculateCacheSize = calculateCacheSize, CleanInterval = cleanInterval });
+        public static ConfigurationBuilderCacheHandlePart WithFileCacheHandle(this ConfigurationBuilderCachePart part, bool calculateCacheSize = false, TimeSpan cleanInterval = new TimeSpan())
+            => part?.WithHandle(typeof(FileCacheHandle<>), DefaultCacheName, false, new FileCacheHandleAdditionalConfiguration { CalculateCacheSize = calculateCacheSize, CleanInterval = cleanInterval });
 
         /// <summary>
         /// Adds a <see cref="FileCacheHandle{TCacheValue}" /> using a <see cref="System.Runtime.Caching.FileCache"/> instance with the given <paramref name="instanceName"/>.
@@ -38,13 +38,13 @@
         /// </returns>
         /// <exception cref="System.ArgumentNullException">If part is null.</exception>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="instanceName"/> is null.</exception>
-        public static ConfigurationBuilderCacheHandlePart WithFileCacheHandle(this ConfigurationBuilderCachePart part, string cacheRoot, bool calculateCacheSize = false, TimeSpan cleanInterval = new TimeSpan(), bool isBackplaneSource = false)
-            => part?.WithHandle(typeof(FileCacheHandle<>), cacheRoot, isBackplaneSource, new FileCacheHandleAdditionalConfiguration { CalculateCacheSize = calculateCacheSize, CleanInterval = cleanInterval });
+        public static ConfigurationBuilderCacheHandlePart WithFileCacheHandle(this ConfigurationBuilderCachePart part, string cacheRoot, bool calculateCacheSize = false, TimeSpan cleanInterval = new TimeSpan())
+            => part?.WithHandle(typeof(FileCacheHandle<>), cacheRoot, false, new FileCacheHandleAdditionalConfiguration { CalculateCacheSize = calculateCacheSize, CleanInterval = cleanInterval });
 
-        public static ConfigurationBuilderCacheHandlePart WithFileCacheHandle(this ConfigurationBuilderCachePart part, string cacheRoot, SerializationBinder binder, bool calculateCacheSize = false, TimeSpan cleanInterval = new TimeSpan(), bool isBackplaneSource = false)
-            => part?.WithHandle(typeof(FileCacheHandle<>), cacheRoot, isBackplaneSource, new FileCacheHandleAdditionalConfiguration { SerializationBinder = binder, CalculateCacheSize = calculateCacheSize, CleanInterval = cleanInterval });
+        public static ConfigurationBuilderCacheHandlePart WithFileCacheHandle(this ConfigurationBuilderCachePart part, string cacheRoot, SerializationBinder binder, bool calculateCacheSize = false, TimeSpan cleanInterval = new TimeSpan())
+            => part?.WithHandle(typeof(FileCacheHandle<>), cacheRoot, false, new FileCacheHandleAdditionalConfiguration { SerializationBinder = binder, CalculateCacheSize = calculateCacheSize, CleanInterval = cleanInterval });
 
-        public static ConfigurationBuilderCacheHandlePart WithFileCacheHandle(this ConfigurationBuilderCachePart part, SerializationBinder binder, bool calculateCacheSize = false, TimeSpan cleanInterval = new TimeSpan(), bool isBackplaneSource = false)
-            => part?.WithHandle(typeof(FileCacheHandle<>), DefaultCacheName, isBackplaneSource, new FileCacheHandleAdditionalConfiguration { SerializationBinder = binder, CalculateCacheSize = calculateCacheSize, CleanInterval = cleanInterval });
+        public static ConfigurationBuilderCacheHandlePart WithFileCacheHandle(this ConfigurationBuilderCachePart part, SerializationBinder binder, bool calculateCacheSize = false, TimeSpan cleanInterval = new TimeSpan())
+            => part?.WithHandle(typeof(FileCacheHandle<>), DefaultCacheName, false, new FileCacheHandleAdditionalConfiguration { SerializationBinder = binder, CalculateCacheSize = calculateCacheSize, CleanInterval = cleanInterval });
     }
 }
